@@ -5,13 +5,22 @@ Vue.use(VueRouter);
 
 const routes = [{
 		path: "/",
-		redirect: "/about"
+		redirect: "/login"
+	},
+	{
+		path: "/login",
+		name: "Login",
+		component: () =>
+			import( /* webpackChunkName: "login" */ "@/views/login/index"),
+		meta: {
+			title: '登录'
+		}
 	},
 	{
 		path: "/about",
 		name: "about",
 		component: () =>
-			import( /* webpackChunkName: "about" */ "../views/AboutView.vue")
+			import( /* webpackChunkName: "about" */ "@/views/home/index")
 	}
 ];
 

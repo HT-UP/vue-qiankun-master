@@ -24,7 +24,7 @@ function start() {
 
 start();
 
-console.log("App running at: http://192.168.2.147:8080")
+console.log("运行成功！App running at: http://192.168.2.147:8080")
 
 process.on('unhandledRejection', (reason, p) => {
   console.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
