@@ -5,14 +5,17 @@
 			<div class="login-form">
 				<el-form ref="loginForm" :model="loginForm" label-width="" :rules="loginRules">
 					<el-form-item label="" prop="username">
-						<el-input v-model.trim="loginForm.username" placeholder="请输入账号" prefix-icon="el-icon-user" clearable @keyup.enter.native="login('loginForm')"></el-input>
+						<el-input v-model.trim="loginForm.username" placeholder="请输入账号" prefix-icon="el-icon-user"
+							clearable @keyup.enter.native="login('loginForm')"></el-input>
 					</el-form-item>
 					<el-form-item label="" prop="password">
-						<el-input v-model.trim="loginForm.password" placeholder="请输入密码" prefix-icon="el-icon-lock" clearable show-password @keyup.enter.native="login('loginForm')"></el-input>
+						<el-input v-model.trim="loginForm.password" placeholder="请输入密码" prefix-icon="el-icon-lock"
+							clearable show-password @keyup.enter.native="login('loginForm')"></el-input>
 					</el-form-item>
 
 					<el-form-item>
-						<el-button class="login-btn" type="primary" :loading="loginLoading" @click="login">登 录</el-button>
+						<el-button class="login-btn" type="primary" :loading="loginLoading" @click="login">登 录
+						</el-button>
 					</el-form-item>
 				</el-form>
 			</div>
@@ -21,13 +24,13 @@
 </template>
 
 <script>
-	// import store from '@/store';
+	import store from '@/store';
 	// import { login } from '@/request/api';
-	
+
 	export default {
 		data() {
 			var validateName = (rule, value, callback) => {
-				if(value === '') {
+				if (value === '') {
 					callback(new Error('请输入账号'));
 				} else {
 					callback();
@@ -35,10 +38,10 @@
 			};
 
 			var validatePass = (rule, value, callback) => {
-				if(value === '') {
+				if (value === '') {
 					callback(new Error('请输入密码'));
 				} else {
-					if(!(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/).test(value)) {
+					if (!(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/).test(value)) {
 						callback(new Error('密码长度应为8到16位，且由数字和字母组成'));
 					} else {
 						callback();
@@ -62,25 +65,28 @@
 						trigger: 'blur'
 					}]
 				},
-				
+
 				loginLoading: false
 			}
+		},
+		created() {
+			store.commit('changeIsSubApp', false);
 		},
 		methods: {
 			//登录
 			login() {
-				this.$refs['loginForm'].validate(async(valid) => {
-					if(valid) {
+				this.$refs['loginForm'].validate(async (valid) => {
+					if (valid) {
 						this.loginLoading = true;
-						this.$router.replace('/home');
-						
+						this.$router.replace('/store/home');
+
 						// try {
 						// 	let params = {
 						// 		username: this.loginForm.username,
 						// 		password: this.loginForm.password
 						// 	}
 						// 	let res = await login(params);
-							
+
 						// 	store.commit('getToken', res.data);
 						// 	localStorage.setItem('userName', this.loginForm.username);
 						// 	this.$message.success('登录成功');
@@ -96,9 +102,6 @@
 					}
 				});
 			},
-		},
-		mounted() {
-
 		}
 	}
 </script>
@@ -112,28 +115,41 @@
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
+
 		.login-box {
 			width: 420px;
 			height: 360px;
 			position: absolute;
 			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-			background: #fff;
-			border-radius: 5px;
+			right: 50%;
+			margin-top: -180px;
+			margin-right: -35%;
+			background: rgba(255, 255, 255, 0.8);
+			border-radius: 8px;
+			border: 1px solid #eaeaea;
+			box-shadow: 5px 5px 5px #d5af90;
+
 			.title {
 				font-size: 24px;
 				font-weight: bold;
 				text-align: center;
 				margin: 30px 0;
 			}
+
 			.login-form {
 				width: 320px;
 				margin: 0 auto;
 			}
-			.login-btn{
+
+			.login-btn {
 				width: 100%;
 				margin-top: 50px;
+			}
+		}
+		
+		@media screen and (max-width: 1200px) {
+			.login-box {
+				margin-right: -210px;
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-		<router-view></router-view>
-
+		<router-view v-if="!isSubApp"></router-view>
+		<layout v-else></layout>
 
 		<!-- <el-container id="home" style="width: 100%;height: 100%;">
 			<el-header
@@ -11,8 +11,8 @@
 			<el-container
 				style="width: 100%;height: -moz-calc(100% - 60px);height: -webkit-calc(100% - 60px);height: calc(100% - 60px);">
 				<el-aside width="200px"> -->
-					<!--导航菜单-->
-					<!-- <el-menu class="sidebar-el-menu" :default-active="onRoutes" background-color="#324157"
+		<!--导航菜单-->
+		<!-- <el-menu class="sidebar-el-menu" :default-active="onRoutes" background-color="#324157"
 						text-color="#bfcbd9" active-text-color="#20a0ff" unique-opened router>
 						<template v-for="item in menuItems">
 							<template v-if="item.subs">
@@ -46,45 +46,45 @@
 					style="width: -moz-calc(100% - 200px);width: -webkit-calc(100% - 200px);width: calc(100% - 200px);height: 100%;padding: 0;overflow: hidden;">
 					<router-view></router-view> -->
 
-					<!-- 微应用的容器 -->
-					<!-- <div id="micro-container"></div>
+		<!-- 微应用的容器 -->
+		<!-- <div id="micro-container"></div>
 				</el-main>
 			</el-container>
 		</el-container> -->
 	</div>
 </template>
 
-<!-- <script>
+<script>
+	import Layout from '@/layout'
+	import store from '@/store';
+
 	export default {
+		components: {
+			Layout
+		},
 		data() {
 			return {
-				menuItems: [{
-					icon: 'el-icon-office-building',
-					index: '/about',
-					title: '主应用'
-				}, {
-					icon: 'el-icon-office-building',
-					index: '/micplugin/homepage',
-					title: '子应用'
-				}]
+				// menuItems: [{
+				// 	icon: 'el-icon-office-building',
+				// 	index: '/about',
+				// 	title: '主应用'
+				// }, {
+				// 	icon: 'el-icon-office-building',
+				// 	index: '/micplugin/homepage',
+				// 	title: '子应用'
+				// }]
 			}
 		},
 		computed: {
-			onRoutes() {
-				if (this.$route.path == '/companyInfoManagement') {
-					return "companyInfo";
-				} else {
-					console.log(this.$route.path.replace('/', ''));
-					return this.$route.path;
-				}
-
+			isSubApp() {
+				return store.state.isSubApp;
 			}
 		},
-		mounted() {
-
+		created() {
+			
 		}
 	}
-</script> -->
+</script>
 
 <style lang="scss">
 	* {

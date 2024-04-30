@@ -7,29 +7,26 @@
 // 判断环境是否是微应用打开
 let microPath = ''
 if (window.__POWERED_BY_QIANKUN__) {
-  microPath = '/store'
+	microPath = '/store'
 }
 
 
-const routes = [
-  {
-    path: microPath + '/',
-    redirect: microPath + '/homepage'
-  },
-  {
-    path: microPath + '/homepage',
-    name: 'homepage',
-    component: () => import(/* webpackChunkName: "homepage" */ '../views/Homepage.vue')
-  },
-  {
-    path: microPath + '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  }
+const routes = [{
+		path: microPath + '/',
+		redirect: microPath + '/home'
+	},
+	{
+		path: microPath + '/home',
+		name: 'Home',
+		component: () => import( /* webpackChunkName: "home" */ '@/views/home/index')
+		meta: {
+			title: '首页'
+		}
+	}
 ]
 
-// const router = new VueRouter({
-//   routes
-// })
+const router = new VueRouter({
+	routes
+})
 
 export default routes

@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = {
   devServer: {
     // 监听端口
+		host: "192.168.2.147",
     port: 8081,
     // 关闭主机检查，使微应用可以被 fetch
     historyApiFallback: true,

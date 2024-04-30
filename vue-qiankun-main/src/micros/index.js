@@ -1,3 +1,4 @@
+import store from '@/store';
 import {
 	registerMicroApps,
 	addGlobalUncaughtErrorHandler,
@@ -19,7 +20,7 @@ registerMicroApps(apps, {
 	beforeLoad: (app) => {
 		// 加载微应用前，加载进度条    
 		NProgress.start();
-
+		
 		console.log('before load=====', app.name)
 		return Promise.resolve()
 	},
@@ -28,6 +29,7 @@ registerMicroApps(apps, {
 		NProgress.done();
 
 		console.log('after mount=====', app.name)
+		store.commit('changeAppName', app.name)
 		return Promise.resolve()
 	}
 })
