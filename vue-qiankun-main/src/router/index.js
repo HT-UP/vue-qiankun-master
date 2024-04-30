@@ -17,10 +17,10 @@ const routes = [{
 		}
 	},
 	{
-		path: "/about",
-		name: "about",
+		path: "/home",
+		name: "Home",
 		component: () =>
-			import( /* webpackChunkName: "about" */ "@/views/home/index")
+			import( /* webpackChunkName: "home" */ "@/views/home/index")
 	}
 ];
 
